@@ -2,6 +2,10 @@
   "name": "vue-magic-box",
   "version": "1.0.3",
   "description": "在vue3中创建可拖拽&可形变&可编辑的web控件",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontStudent/vue-magic-box.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
