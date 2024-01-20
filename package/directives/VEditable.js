@@ -10,7 +10,7 @@ export const vEditable = {
       // 将input元素聚焦
       el.focus()
     })
-    // 给input元素添加失焦事件，当失焦时恢复为div元素
+    // 给input元素添加失焦事件
     el.addEventListener('blur', () => {
       el.style.border = 'none'
     })

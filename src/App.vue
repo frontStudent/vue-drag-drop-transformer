@@ -2,6 +2,6 @@
 </script>
 
 <template>
- <MagicBox></MagicBox>
+ <MagicBox>1111</MagicBox>
 </template>
 
