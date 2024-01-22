@@ -2,6 +2,8 @@
 </script>
 
 <template>
- <MagicBox>1111</MagicBox>
+ <MagicBox value="- PERSONAL RESUME -">1111</MagicBox>
 </template>
 
+<style scoped>
+</style>
