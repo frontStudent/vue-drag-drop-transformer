@@ -67,19 +67,9 @@ onMounted(() => {
     outline: none;
     border: none;
     resize: none;
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        'Segoe UI',
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        'Fira Sans',
-        'Droid Sans',
-        'Helvetica Neue',
-        sans-serif;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: inherit;
 }
 
 .menu {
