@@ -1,6 +1,6 @@
 export const vDraggable = {
   mounted: (el, binding) => {
-    if(binding.value?.disable) return
+    if (binding.value?.disable) return
     let startX,
       startY,
       startWidth,
@@ -8,15 +8,17 @@ export const vDraggable = {
       startLeft,
       startTop,
       moving = false
-    el.style.maxWidth = binding.value?.maxWidth || '600px'
-    el.style.maxHeight = binding.value?.maxHeight || '800px'
+
     el.style.position = 'absolute'
     el.style.transform = 'translate(-50%, -50%)'
 
     const onMouseDown = (e) => {
       e.preventDefault()
+
+      // 鼠标点击处相对于左上角的坐标
       startX = e.clientX
       startY = e.clientY
+
       startWidth = el.offsetWidth
       startHeight = el.offsetHeight
       startLeft = el.offsetLeft
@@ -28,17 +30,35 @@ export const vDraggable = {
     // 鼠标按下开始拖动
     const onStartResize = (e) => {
       moving = true
+      const direction = el.style.cursor?.split('-')?.[0]
+
+      // 鼠标自按下之后移动距离
       const dx = e.clientX - startX
       const dy = e.clientY - startY
+
       let width = startWidth,
         height = startHeight,
         left = startLeft,
         top = startTop
-      const direction = el.style.cursor?.split('-')?.[0]
+
       // 拖拽移动位置
       if (direction === 'move') {
         el.style.left = startLeft + dx + 'px'
         el.style.top = startTop + dy + 'px'
+        return
+      }
+      // 水平方向
+      if (direction.includes('e')) {
+        return
+      }
+      if (direction.includes('w')) {
+        return
+      }
+      // 垂直方向
+      if (direction.includes('s')) {
+        return
+      }
+      if (direction.includes('n')) {
         return
       }
       el.style.width = width

@@ -2,15 +2,20 @@ export const vResizable = {
   mounted: (el, binding) => {
     if(binding.value?.disable) return
     let startX, startY, startWidth, startHeight, startLeft, startTop, moving = false
-    el.style.maxWidth = binding.value?.maxWidth || '600px'
-    el.style.maxHeight = binding.value?.maxHeight || '800px'
+    if(binding.value?.maxWidth) el.style.maxWidth = binding.value?.maxWidth 
+    if(binding.value?.maxHeight) el.style.maxHeight = binding.value?.maxHeight
+    
+    // el.style.top = '50%'
+    // el.style.left = '50%'
     el.style.position = 'absolute'
     el.style.transform = 'translate(-50%, -50%)'
     
     const onMouseDown = (e) => {
       e.preventDefault();
+
       startX = e.clientX
       startY = e.clientY
+      
       startWidth = el.offsetWidth
       startHeight = el.offsetHeight
       startLeft = el.offsetLeft
@@ -22,6 +27,7 @@ export const vResizable = {
     // 鼠标按下开始拖动
     const onStartResize = (e) => {
       moving = true
+      
       const dx = e.clientX - startX
       const dy = e.clientY - startY
       let width = startWidth,

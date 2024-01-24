@@ -1,6 +1,6 @@
 {
   "name": "vue-magic-box",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "在vue3中创建可拖拽&可形变&可编辑的web控件",
   "repository": {
     "type": "git",

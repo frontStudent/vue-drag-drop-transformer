@@ -21,9 +21,9 @@ app.mount('#app')
 3. 使用
 ```vue title="App.vue"
 <template>
-    <div>
-        <MagicBox></MagicBox>
-    </div>
+    <MagicBox :style="{top: '100px',left: '200px'}">
+        11111111111111111111111111111111
+    </MagicBox>
 </template>
 ```
 
@@ -34,8 +34,9 @@ app.mount('#app')
 | editable | 盒子是否可编辑内容 | boolean | true | >=1.0.3 |
 | resizable | 盒子是否可调整大小 | boolean | true | >=1.0.3 |
 | draggable | 盒子是否可拖拽移动位置 | boolean | true | >=1.0.3 |
-| value | 盒子内部文字内容 | string | '可拖拽、可形变、可编辑的神奇盒子' | >=1.0.3 |
-| fontSize | 盒子内部文字大小 | string | '16px' | >=1.0.3 |
+| style | 盒子样式 | object | {} | >=1.0.5 |
+| onFocus | editable为true时生效 获得焦点时的回调函数 | function | () => {} | >=1.0.5 |
+| onBlur | editable为true时生效 失去焦点时的回调函数 | function | () => {} | >=1.0.5 |
 
 ### 版本历史
 1.0.0 - 1.0.3
