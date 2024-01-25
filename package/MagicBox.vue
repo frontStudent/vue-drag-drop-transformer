@@ -1,6 +1,6 @@
 <template>
     <div class="magic-box" v-editable="{ disable: !props.editable, onFocus: props.onFocus, onBlur: props.onBlur }"
-        v-resizable="{ disable: !props.resizable }" v-draggable="{ disable: !props.draggable }" :style="props.style">
+        v-resizable="{ disable: !props.resizable, rightBottomOnly: true }" v-draggable="{ disable: !props.draggable }" :style="props.style">
         <slot></slot>
     </div>
 </template>
@@ -45,7 +45,7 @@ const props = defineProps({
     /* position: absolute;
     top: 50%;
     left: 50%; */
-    width: 200px;
+    width: 100%;
     /* outline: none; */
     border: none;
     /* resize: none; */
@@ -53,4 +53,5 @@ const props = defineProps({
     font-family: inherit;
     background-color: inherit;
 }
+
 </style>

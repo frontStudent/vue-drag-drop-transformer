@@ -3,26 +3,35 @@ export const vDraggable = {
     if (binding.value?.disable) return
     let startX,
       startY,
-      startWidth,
-      startHeight,
-      startLeft,
-      startTop,
+      translateX,
+      translateY,
       moving = false
 
-    el.style.position = 'absolute'
-    el.style.transform = 'translate(-50%, -50%)'
+    let borderStyle = el.style.border
+    // el.style.position = 'absolute'
+    // el.style.transform = 'translate(-50%, -50%)'
 
     const onMouseDown = (e) => {
       e.preventDefault()
-
+      el.style.border = '1px dashed #ccc'
       // 鼠标点击处相对于左上角的坐标
       startX = e.clientX
       startY = e.clientY
 
-      startWidth = el.offsetWidth
-      startHeight = el.offsetHeight
-      startLeft = el.offsetLeft
-      startTop = el.offsetTop
+      const curTransform = el.style.transform
+      const regex = /translate\((-?\d+)px,\s*(-?\d+)px\)/
+      const match = curTransform.match(regex)
+      
+      if (match) {
+        const [_, x, y] = match
+        translateX = Number(x)
+        translateY = Number(y)
+      }
+      else {
+        translateX = 0
+        translateY = 0
+      }
+
       document.addEventListener('mousemove', onStartResize)
       document.addEventListener('mouseup', onMouseUp)
     }
@@ -30,21 +39,16 @@ export const vDraggable = {
     // 鼠标按下开始拖动
     const onStartResize = (e) => {
       moving = true
+
       const direction = el.style.cursor?.split('-')?.[0]
 
       // 鼠标自按下之后移动距离
       const dx = e.clientX - startX
       const dy = e.clientY - startY
 
-      let width = startWidth,
-        height = startHeight,
-        left = startLeft,
-        top = startTop
-
       // 拖拽移动位置
       if (direction === 'move') {
-        el.style.left = startLeft + dx + 'px'
-        el.style.top = startTop + dy + 'px'
+        el.style.transform = `translate(${translateX + dx}px, ${translateY + dy}px)`
         return
       }
       // 水平方向
@@ -61,10 +65,6 @@ export const vDraggable = {
       if (direction.includes('n')) {
         return
       }
-      el.style.width = width
-      el.style.height = height
-      el.style.left = left
-      el.style.top = top
     }
 
     // cursor样式根据边界位置变化
@@ -85,6 +85,7 @@ export const vDraggable = {
 
     const onMouseUp = () => {
       moving = false
+      el.style.border = borderStyle
       document.removeEventListener('mousemove', onStartResize)
       document.removeEventListener('mouseup', onMouseUp)
     }
