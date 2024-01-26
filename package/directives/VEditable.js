@@ -1,13 +1,11 @@
 export const vEditable = {
   mounted: (el, binding) => {
     if(binding.value?.disable) return
-    el.style.padding = '5px'
+    el.style.padding = '1px'
     el.style.outline = 'none'
     el.contentEditable = true
 
-    let borderStyle = el.style.border
-    el.addEventListener('click', () => {
-      el.style.border = '1px dashed #ccc'
+    el.addEventListener('dblclick', () => {
       // 将input元素聚焦
       el.focus()
       typeof binding.value?.onFocus === 'function' && binding.value?.onFocus(el)
@@ -22,8 +20,12 @@ export const vEditable = {
     })
     // 给input元素添加失焦事件
     el.addEventListener('blur', () => {
-      el.style.border = borderStyle
       typeof binding.value?.onBlur === 'function' && binding.value?.onBlur(el)
+    })
+
+    el.addEventListener('dblclick', () => {   
+      el.setAttribute('magicStatus', 'dblclick');
+      el.style.cursor = 'auto'
     })
   }
 }

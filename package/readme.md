@@ -1,6 +1,16 @@
 ### 功能简介
-一个可拖拽、可形变、可编辑内容的神奇盒子
+一个可拖拽、可缩放、可编辑内容的神奇盒子
 
+用户友好的交互：
+- 单击盒子后进入可拖拽/可缩放状态
+- 双击盒子时进入可编辑状态
+- 点击空白处退出
+- 拖拽/调整大小时支持基准线
+
+丰富的入参配置：
+- 可自定义是否需要可拖拽、可缩放、可编辑内容
+- 可限制拖拽范围/调整大小的最值等参数
+- 暴露各种事件触发时回调函数
 ### 在vue3项目中引入
 1. 安装
 ```
@@ -41,9 +51,7 @@ app.mount('#app')
 | resizable | 盒子是否可调整大小 | boolean | true | >=1.0.3 |
 | draggable | 盒子是否可拖拽移动位置 | boolean | true | >=1.0.3 |
 | style | 盒子样式 | object | {} | >=1.0.5 |
-| rightBottomOnly | resizable为true时生效 只能通过右/下边界和右下角调整大小 | boolean | true | >=1.0.5 |
-| onFocus | editable为true时生效 获得焦点时的回调函数 | function | () => {} | >=1.0.5 |
-| onBlur | editable为true时生效 失去焦点时的回调函数 | function | () => {} | >=1.0.5 |
+| rightBottomOnly | resizable为true时生效 只能通过右/下边界和右下角调整大小 | boolean | false | >=1.0.5 |
 
 ### 版本历史
 1.0.0 - 1.0.4
