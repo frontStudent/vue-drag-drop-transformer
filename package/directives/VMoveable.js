@@ -1,7 +1,10 @@
-export const vDraggable = {
+export const vMoveable = {
   mounted: (el, binding) => {
     if (binding.value?.disable) return
-    
+    if (binding.value?.translateParams?.length === 2) {
+      const [translateX, translateY] = binding.value.translateParams
+      el.style.transform = `translate(${translateX}px, ${translateY}px)`
+    }
     let startX,
       startY,
       translateX,

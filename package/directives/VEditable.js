@@ -1,7 +1,6 @@
 export const vEditable = {
   mounted: (el, binding) => {
     if(binding.value?.disable) return
-    el.style.padding = '1px'
     el.style.outline = 'none'
     el.contentEditable = true
 

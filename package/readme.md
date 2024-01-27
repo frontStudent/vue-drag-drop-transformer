@@ -37,7 +37,7 @@ app.mount('#app')
     <MagicBox :resizable="false">
         11111111111111111111111111111111
     </MagicBox>
-    <MagicBox :draggable="false">
+    <MagicBox :moveable="false">
         11111111111111111111111111111111
     </MagicBox>
 </template>
@@ -49,7 +49,7 @@ app.mount('#app')
 |---------|---------|---------|---------|---------|
 | editable | 盒子是否可编辑内容 | boolean | true | >=1.0.3 |
 | resizable | 盒子是否可调整大小 | boolean | true | >=1.0.3 |
-| draggable | 盒子是否可拖拽移动位置 | boolean | true | >=1.0.3 |
+| moveable | 盒子是否可自由拖动 | boolean | true | >=1.0.3 |
 | style | 盒子样式 | object | {} | >=1.0.5 |
 | rightBottomOnly | resizable为true时生效 只能通过右/下边界和右下角调整大小 | boolean | false | >=1.0.5 |
 

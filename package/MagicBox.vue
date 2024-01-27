@@ -1,7 +1,11 @@
 <template>
-    <div class="magic-box" v-editable="{ disable: !props.editable, onFocus: props.onFocus, onBlur: props.onBlur }" v-quit
-        v-resizable="{ disable: !props.resizable, rightBottomOnly: false }" v-draggable="{ disable: !props.draggable }"
-        :style="props.style">
+    <div class="magic-box" 
+        v-editable="{ disable: !props.editable }" 
+        v-resizable="{ disable: !props.resizable, rightBottomOnly: false }" 
+        v-moveable="{ disable: !props.moveable, translateParams: props.initPosition }"
+        v-quit
+        :style="props.style"
+    >
         <slot></slot>
     </div>
 </template>
@@ -9,7 +13,7 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
 import { vResizable } from './directives/VResizable.js'
-import { vDraggable } from './directives/VDraggable.js'
+import { vMoveable } from './directives/VMoveable.js'
 import { vEditable } from './directives/VEditable.js'
 import { vQuit } from './directives/VQuit.js'
 
@@ -19,21 +23,16 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
-    onFocus: {
-        type: Function,
-        default: () => { }
-    },
-    onBlur: {
-        type: Function,
-        default: () => { }
-    },
     resizable: {
         type: Boolean,
         default: true
     },
-    draggable: {
+    moveable: {
         type: Boolean,
         default: true
+    },
+    initPosition: {
+        type: Array
     },
     style: {
         type: Object,

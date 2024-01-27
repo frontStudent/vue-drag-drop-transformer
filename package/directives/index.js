@@ -1,9 +1,9 @@
-import { vDraggable } from './VDraggable'
+import { vMoveable } from './VMoveable'
 import { vResizable } from './VResizable'
 import { vEditable } from './VEditable'
 
 export default {
-  draggable: vDraggable,
+  moveable: vMoveable,
   resizable: vResizable,
   editable: vEditable
 }
