@@ -5,6 +5,8 @@ export const vEditable = {
     el.contentEditable = true
 
     el.addEventListener('dblclick', () => {
+      el.setAttribute('magicStatus', 'dblclick');
+      el.style.cursor = 'auto'
       // 将input元素聚焦
       el.focus()
       typeof binding.value?.onFocus === 'function' && binding.value?.onFocus(el)
@@ -20,11 +22,6 @@ export const vEditable = {
     // 给input元素添加失焦事件
     el.addEventListener('blur', () => {
       typeof binding.value?.onBlur === 'function' && binding.value?.onBlur(el)
-    })
-
-    el.addEventListener('dblclick', () => {   
-      el.setAttribute('magicStatus', 'dblclick');
-      el.style.cursor = 'auto'
     })
   }
 }

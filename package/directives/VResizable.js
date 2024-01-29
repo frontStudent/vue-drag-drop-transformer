@@ -1,3 +1,5 @@
+import getTransformParams from "../utils/getTransformParams"
+
 export const vResizable = {
   mounted: (el, binding) => {
     if (binding.value?.disable) return
@@ -19,18 +21,8 @@ export const vResizable = {
       startWidth = el.offsetWidth
       startHeight = el.offsetHeight
 
-      const curTransform = el.style.transform
-      const regex = /translate\((-?\d+)px,\s*(-?\d+)px\)/
-      const match = curTransform.match(regex)
-
-      if (match) {
-        const [_, x, y] = match
-        startTranslateX = Number(x)
-        startTranslateY = Number(y)
-      } else {
-        startTranslateX = 0
-        startTranslateY = 0
-      }
+      startTranslateX = getTransformParams(el)[0]
+      startTranslateY = getTransformParams(el)[1]
 
       document.addEventListener('mousemove', onStartResize)
       document.addEventListener('mouseup', onMouseUp)
@@ -50,8 +42,6 @@ export const vResizable = {
       const direction = el.style.cursor?.split('-')?.[0]
       // 拖拽移动位置
       if (direction === 'move' || direction === 'default' || direction === 'pointer') {
-        // el.style.left = startLeft + dx + 'px'
-        // el.style.top = startTop + dy + 'px'
         return
       }
       // 水平方向
@@ -130,7 +120,6 @@ export const vResizable = {
         el.style.cursor = 'nw-resize'
         return
       }
-
       el.style.cursor = 'default'
     }
 

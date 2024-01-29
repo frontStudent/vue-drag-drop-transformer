@@ -17,7 +17,6 @@ import { vMoveable } from './directives/VMoveable.js'
 import { vEditable } from './directives/VEditable.js'
 import { vQuit } from './directives/VQuit.js'
 
-
 const props = defineProps({
     editable: {
         type: Boolean,

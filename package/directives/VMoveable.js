@@ -1,14 +1,18 @@
+import getTransformParams from "../utils/getTransformParams"
+
 export const vMoveable = {
   mounted: (el, binding) => {
     if (binding.value?.disable) return
     if (binding.value?.translateParams?.length === 2) {
       const [translateX, translateY] = binding.value.translateParams
+      // el.style.top = translateY + 'px'
+      // el.style.left = translateX + 'px'
       el.style.transform = `translate(${translateX}px, ${translateY}px)`
     }
     let startX,
       startY,
-      translateX,
-      translateY,
+      startTranslateX,
+      startTranslateY,
       moving = false
 
     const onMouseDown = (e) => {
@@ -17,19 +21,8 @@ export const vMoveable = {
       startX = e.clientX
       startY = e.clientY
 
-      const curTransform = el.style.transform
-      const regex = /translate\((-?\d+)px,\s*(-?\d+)px\)/
-      const match = curTransform.match(regex)
-      
-      if (match) {
-        const [_, x, y] = match
-        translateX = Number(x)
-        translateY = Number(y)
-      }
-      else {
-        translateX = 0
-        translateY = 0
-      }
+      startTranslateX = getTransformParams(el)[0]
+      startTranslateY = getTransformParams(el)[1]
 
       document.addEventListener('mousemove', onStartMove)
       document.addEventListener('mouseup', onMouseUp)
@@ -46,7 +39,7 @@ export const vMoveable = {
 
       // 拖拽移动位置
       if (direction === 'move') {
-        el.style.transform = `translate(${translateX + dx}px, ${translateY + dy}px)`
+        el.style.transform = `translate(${startTranslateX + dx}px, ${startTranslateY + dy}px)`
         return
       }
       // 水平方向
