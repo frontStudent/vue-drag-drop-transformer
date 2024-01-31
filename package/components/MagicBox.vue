@@ -3,7 +3,7 @@
         v-editable="{ disable: !props.editable }" 
         v-resizable="{ disable: !props.resizable, rightBottomOnly: false }" 
         v-moveable="{ disable: !props.moveable, translateParams: props.initPosition }"
-        v-quit
+        v-click-outside
         :style="props.style"
     >
         <slot></slot>
@@ -12,10 +12,10 @@
   
 <script setup lang="ts">
 // import { ref } from 'vue'
-import { vResizable } from './directives/VResizable.js'
-import { vMoveable } from './directives/VMoveable.js'
-import { vEditable } from './directives/VEditable.js'
-import { vQuit } from './directives/VQuit.js'
+import { vResizable } from '../directives/VResizable.js'
+import { vMoveable } from '../directives/VMoveable.js'
+import { vEditable } from '../directives/VEditable.js'
+import { vClickOutside } from '../directives/VClickOutside.js'
 
 const props = defineProps({
     editable: {

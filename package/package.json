@@ -1,7 +1,7 @@
 {
-  "name": "vue-magic-box",
-  "version": "1.0.5",
-  "description": "在vue3中创建可拖拽&可形变&可编辑的web控件",
+  "name": "vue-drag-drop-transformer",
+  "version": "0.0.1",
+  "description": "元素复制拖放至画布后，赋予可编辑&可缩放&可移动等丰富功能",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontStudent/vue-magic-box.git"

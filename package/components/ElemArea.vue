@@ -1,0 +1,25 @@
+<template>
+    <div id="source" :ondrop="handleSourceAreaDrop" :ondragover="handleAllowDrop">
+        <slot></slot>
+    </div>
+</template>
+
+<script setup>
+const handleSourceAreaDrop = (e) => {
+    const dragElemId = e.dataTransfer.getData("dragEl");
+    const dragElem = document.getElementById(dragElemId);
+    dragElem.remove();
+};
+const handleAllowDrop = (e) => {
+    e.preventDefault();
+};
+</script>
+
+<style scoped>
+#source {
+    margin: 30px;
+    width: 300px;
+    height: 500px;
+    border: 1px solid #ccc;
+}
+</style>
