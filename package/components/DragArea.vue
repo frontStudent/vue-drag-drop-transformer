@@ -1,11 +1,11 @@
 <template>
-    <div id="source" :ondrop="handleSourceAreaDrop" :ondragover="handleAllowDrop">
+    <div id="source" :ondrop="handleDragAreaDrop" :ondragover="handleAllowDrop">
         <slot></slot>
     </div>
 </template>
 
 <script setup>
-const handleSourceAreaDrop = (e) => {
+const handleDragAreaDrop = (e) => {
     const dragElemId = e.dataTransfer.getData("dragEl");
     const dragElem = document.getElementById(dragElemId);
     dragElem.remove();

@@ -1,11 +1,11 @@
 <template>
     <div style="display:flex">
-        <ElemArea>
+        <DragArea>
             <DragEditor>文本框</DragEditor>
             <DragElem elemType="rect">矩形</DragElem>
             <DragElem class="default-box">默认</DragElem>
-        </ElemArea>
-        <TargetArea :mapTypeToDropHandler="{ rect: handleDropRec }"></TargetArea>
+        </DragArea>
+        <DropArea :mapTypeToDropHandler="{ rect: handleDropRec }"></DropArea>
     </div>
 </template>
   

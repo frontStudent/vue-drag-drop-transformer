@@ -1,6 +1,6 @@
 import MagicBox from './components/MagicBox.vue'
-import ElemArea from './components/ElemArea.vue'
-import TargetArea from './components/TargetArea.vue'
+import DragArea from './components/DragArea.vue'
+import DropArea from './components/DropArea.vue'
 import DragElem from './components/DragElem.vue'
 import DragEditor from './components/DragEditor.vue'
 
@@ -11,10 +11,10 @@ import useMagicBox from './hooks/useMagicBox'
 
 import directives from './directives'
 
-export { MagicBox, ElemArea, TargetArea }
+export { DragElem, DragEditor, MagicBox, DragArea, DropArea }
 export { useEditable, useMoveable, useResizable, useMagicBox }
 
-const comps = [DragElem, DragEditor, MagicBox, ElemArea, TargetArea]
+const comps = [DragElem, DragEditor, MagicBox, DragArea, DropArea]
 const install = (Vue) => {
   comps.map((component) => {
     Vue.component(component.__name, component)

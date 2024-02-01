@@ -4,7 +4,7 @@
   "description": "元素复制拖放至画布后，赋予可编辑&可缩放&可移动等丰富功能",
   "repository": {
     "type": "git",
-    "url": "https://github.com/frontStudent/vue-magic-box.git"
+    "url": "https://github.com/frontStudent/vue-drag-drop-transformer.git"
   },
   "main": "index.js",
   "scripts": {

@@ -1,10 +1,9 @@
 <template>
-    <div class="box" v-clone-draggable="{ elemType: 'editor' }"><slot></slot></div>
+    <DragElem elemType="editor"><slot></slot></DragElem>
 </template>
   
 <script setup lang="ts">
-// import { ref } from 'vue'
-import { vCloneDraggable } from '../directives/VCloneDraggable.js'
+import DragElem from './DragElem.vue';
 </script>
 
 <style scope>
