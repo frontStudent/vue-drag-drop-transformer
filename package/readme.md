@@ -27,8 +27,6 @@ vue-drag-drop-transformer提供了三类主要组件完成上述需求
 
 当然，vue-drag-drop-transformer中已经封装了许多常用的处理函数可直接调用，具体见#dom操作方法与对应的自定义指令#
 
-
-
 ### 在vue3项目中引入
 1. 安装
 ```
