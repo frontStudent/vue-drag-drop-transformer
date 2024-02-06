@@ -31,7 +31,7 @@ app.mount('#app')
         </DragArea>
         <DropArea
             :showFormatLine="true"
-            :formatLineStyle="{color: 'green', width: '3px'}">
+            :formatLineStyle="{color: 'green', width: '3px'}"
         >
         </DropArea>
     </div>
