@@ -45,7 +45,7 @@ export const config = {
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/basicComponents/DragArea' }
     ],
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vangleer' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/frontStudent/vue-drag-drop-transformer.git' }],
     sidebar: {
       '/guide/': sidebarList,
       '/basicComponents/': sidebarList

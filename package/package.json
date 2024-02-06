@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "元素被拖放至画布后，赋予可编辑&可缩放&可移动等丰富功能",
   "files": ["dist"],
+  "main": "dist/index.umd.js",
+  "module":"dist/index.es.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontStudent/vue-drag-drop-transformer.git"
