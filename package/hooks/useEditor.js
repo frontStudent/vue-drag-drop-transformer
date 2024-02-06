@@ -3,9 +3,9 @@ import useMoveable from './useMoveable'
 import useResizable from './useResizable'
 import useClickOutside from './useClickOutside'
 
-export default (el) => {
-  useEditable(el)
-  useResizable(el)
+export default (el, binding) => {
+  useEditable(el, binding)
+  useResizable(el, binding)
   useClickOutside(el)
-  useMoveable(el)
+  useMoveable(el, binding)
 }

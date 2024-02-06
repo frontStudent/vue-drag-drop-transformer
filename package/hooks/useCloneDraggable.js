@@ -1,6 +1,6 @@
 export default (el, binding) => {
   el.addEventListener('mousedown', (e) => {
-    if (e.target === e.currentTarget) {
+    // if (e.target === e.currentTarget) {
       const clientX = e.clientX
       const clientY = e.clientY
 
@@ -18,6 +18,6 @@ export default (el, binding) => {
         e.dataTransfer.setData('startY', clientY)
       })
       e.target.parentNode.appendChild(cloneEl)
-    }
+    // }
   })
 }

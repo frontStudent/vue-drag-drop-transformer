@@ -7,12 +7,12 @@ import DragEditor from './components/DragEditor.vue'
 import useEditable from './hooks/useEditable'
 import useMoveable from './hooks/useMoveable'
 import useResizable from './hooks/useResizable'
-import useMagicBox from './hooks/useMagicBox'
+import useEditor from './hooks/useEditor'
 
 import directives from './directives'
 
 export { DragElem, DragEditor, MagicBox, DragArea, DropArea }
-export { useEditable, useMoveable, useResizable, useMagicBox }
+export { useEditable, useMoveable, useResizable, useEditor }
 
 const comps = [DragElem, DragEditor, MagicBox, DragArea, DropArea]
 const install = (Vue) => {

@@ -1,4 +1,4 @@
-export default (el) => {
+export const getTransformParams = (el) => {
     const curTransform = el.style.transform
     const regex = /translate\((-?\d+)px,\s*(-?\d+)px\)/
     const match = curTransform.match(regex)
@@ -12,4 +12,10 @@ export default (el) => {
       translateY = 0
     }
     return [translateX, translateY]
+}
+
+export const getPxNumber = (prop) => {
+  const regex = /(-?\d+)px/
+  const match = prop.match(regex)
+  return match ? Number(match[1]) : 0
 }

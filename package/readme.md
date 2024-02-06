@@ -1,16 +1,17 @@
-## vue-drag-drop-transformer
-### 背景
-Drag and Drop是前端场景中常见功能需求，但细分也有很多不同的场景
+# vue-drag-drop-transformer
+
+## 背景
+`Drag and Drop`是前端场景中常见功能需求，但细分也有很多不同的场景
 - 直接将某个div从A区域拖动放置至B区域
 - 单个列表中&双列表之间的拖拽排序
 - 工具栏+画布式的应用（思维导图/原型设计/简历制作/可视化低代码平台等）
 
-vue-drag-drop-transformer主要专注于工具栏+画布式应用的场景
+`vue-drag-drop-transformer`主要专注于工具栏+画布式应用的场景
 1. 在点击元素时复制一份出来进行拖动，原始元素依然保留在工具区域
 2. 工具栏元素拖放至画布后，赋予其可自定义的丰富功能（可编辑&可缩放&可移动等）
 
-### 核心功能
-vue-drag-drop-transformer不同于其他拖拽库的核心点在于，能够在元素被drop后，展现出和被drag前不同的特性。
+## 核心功能
+`vue-drag-drop-transformer`不同于其他拖拽库的核心点在于，能够在元素被drop后，展现出和被drag前不同的特性。
 试想一个类型为文本框的元素，它被drag前只是工具栏中示意性的图标，只有被drop到画布后，才能被用户进行编辑&缩放&拖动等操作。
 
 将这个例子抽象为更普遍的需求：
@@ -19,15 +20,15 @@ vue-drag-drop-transformer不同于其他拖拽库的核心点在于，能够在�
 一个类型为C的元素，在拖拽至画布后，只需和原先保持一致
 ···
 
-vue-drag-drop-transformer提供了三类主要组件完成上述需求
-- DragArea 工具栏区域
-- DragElem 工具栏中的元素
-- DropArea 画布区域
-使用者在DragElem组件上设置elemType属性表示其类型，在DropArea组件上设置mapTypeToDropHandler属性，将元素类型映射到对应的处理函数，处理函数中可以进行自定义dom操作
+`vue-drag-drop-transformer`提供了三类基础组件完成上述需求
+- `DragArea` 工具栏区域
+- `DragElem` 工具栏中的元素
+- `DropArea` 画布区域
+使用者在`DragElem`组件上设置`elemType`属性表示其类型，在`DropArea`组件上设置`mapTypeToDropHandler`属性，将元素类型映射到对应的处理函数，处理函数中可以进行自定义dom操作
 
-当然，vue-drag-drop-transformer中已经封装了许多常用的处理函数可直接调用，具体见#dom操作方法与对应的自定义指令#
+当然，`vue-drag-drop-transformer`中已经内置了一些常用的`elemType`属性（具体见`DragElem`组件API），使用者不需要再专门为这些类型编写处理函数
 
-### 在vue3项目中引入
+## 在vue3项目中引入
 1. 安装
 ```
 npm install vue-drag-drop-transformer
@@ -37,7 +38,10 @@ npm install vue-drag-drop-transformer
 ```js title="src/main.js"
 import { createApp } from 'vue'
 import App from './App.vue'
+
 import Transformer from 'vue-drag-drop-transformer'
+import 'vue-drag-drop-transformer/dist/style.css'
+
 const app = createApp(App)
 
 app.use(Transformer)
@@ -49,65 +53,81 @@ app.mount('#app')
 <template>
     <div style="display:flex">
         <DragArea>
-            <DragEditor>文本框</DragEditor>
-            <DragElem elemType="rect">矩形</DragElem>
-            <DragElem class="default-box">默认</DragElem>
+            <DragElem>默认</DragElem>
+            <DragElem elemType="editor">文本框</DragElem>
+            <DragElem elemType="move">仅可移动</DragElem>
+            <DragElem elemType="move-resize" class="img-container">
+                <img src="./assets/test-img.png" style="height: 100px; width: 100px" />
+            </DragElem>
+            <DragElem elemType="move-resize" style="width: 200px">
+                <DragElem>子元素1</DragElem>
+                <DragElem>子元素2</DragElem>
+            </DragElem>
         </DragArea>
-        <DropArea :mapTypeToDropHandler="{ rect: handleDropRec }"></DropArea>
+        <DropArea 
+            :mapTypeToDropHandler="{ typeA: handleDropTypeA }" 
+            :moveLimited="false" 
+            :showFormatLine="true"
+            :formatLineStyle="{color: 'green', width: '3px'}">
+        </DropArea>
     </div>
 </template>
   
 <script setup>
-import { useMoveable } from "vue-drag-drop-transformer"
-
-const handleDropRec = (el) => {
-    useMoveable(el)
+const handleDropTypeA = (el) => {
+    // 对类型为typeA的元素做一些自定义的dom操作
+    console.log(el)
 }
 
 </script>
   
 <style scoped>
-.default-box{
-    background-color: #e8bbbb;
-    padding: 10px;
-    border: 1px solid #e40d0d;
+.img-container {
+    border: none;
+    padding: 0px
 }
 </style>
 ```
 
-### 组件
+## 基础组件
 
-#### DragArea
+### DragArea
+工具栏区域，作为DragElem组件的父容器
 
-#### DragElem
-
+### DragElem
 DragArea下的子元素，当用户点击时会自我复制一份以供拖动
 
+#### API
 | 参数名 | 说明 | 类型 | 默认值 | 版本 |
 |---------|---------|---------|---------|---------|
-| elemType | 自定义的元素类型 | string | 'default' | >=1.0.3 |
+| elemType | 自定义的元素类型 | string | 'default' | >=0.0.1 |
 
-#### DragEditor
+### DropArea
+画布区域，可放置DragElem组件
 
-DragEditor是elemType设置为'editor'时的DragElem，属于内置固定类型的可拖动元素
-
-#### DropArea
-
+#### API
 | 参数名 | 说明 | 类型 | 默认值 | 版本 |
 |---------|---------|---------|---------|---------|
-| mapTypeToDropHandler | 不同类型的元素在放置时触发的dom操作函数 | { [key: string]: (el: HTMLElement) => void } | {} | >=1.0.3 |
+| mapTypeToDropHandler | 不同类型的元素在放置时触发的dom操作函数 | { [key: string]: (el: HTMLElement) => void } | {} | >=0.0.1 |
+| moveLimited | 移动元素时是否可超出DropArea的范围 | boolean | false | >=0.0.1 |
+| showFormatLine | 是否显示对齐辅助线 | boolean | true | >=0.0.1 |
+| formatLineStyle | 对齐辅助线样式 | { color: string, width: string } | {} | >=0.0.1 |
 
-如果你不设置mapTypeToDropHandler属性：
-当一个DragElem被拖放至DropArea时将保留原样，不会为其添加任何属性
-当一个DragEditor被拖放至DropArea时将自动添加可编辑&可缩放&可移动的属性
+如果你不设置mapTypeToDropHandler属性，那么当一个DragElem被拖放至DropArea时将会根据其elemType属性来决定其行为，具体规则在DragElem组件的API中已进行说明
 
-如果你想覆盖DragEditor被拖放至DropArea后的行为，可以这样设置：
+如果你想自定义DragElem被拖放至DropArea后的行为，可以这样设置：
 ```jsx
 <DropArea :mapTypeToDropHandler="{ editor: handleDropEditor }"></DropArea>
 ```
-即用自定义的handleDropEditor覆盖对DragEditor的默认处理
+即用自定义的handleDropEditor去覆盖对elemType为DragElem的默认处理
 
-#### MagicBox 
+## 其他组件
+
+### MagicBox 
+
+#### 基础用法
+
+#### API
 
 | 参数名 | 说明 | 类型 | 默认值 | 版本 |
 |---------|---------|---------|---------|---------|
@@ -116,16 +136,13 @@ DragEditor是elemType设置为'editor'时的DragElem，属于内置固定类型�
 | moveable | 盒子是否可自由拖动 | boolean | true | >=1.0.3 |
 | rightBottomOnly | resizable为true时生效 只能通过右/下边界和右下角调整大小 | boolean | false | >=1.0.5 |
 
-### dom操作方法与对应的自定义指令
+## dom操作方法与对应的自定义指令
+
+#### 基础用法
+
+#### API
 | hook | directive | 说明 |
 |---------|---------|---------|
 | useMoveable | v-moveable | 鼠标按住可自由移动 |
 | useResizable | v-resizable | 鼠标移至边框可自由缩放 | 
 | useEditable | v-editable | 鼠标双击后进入可编辑状态 |
-
-## 开发计划
-
-- 更多回调函数支持，如onValueChange/onResize/onDrag等
-- 右上角关闭按钮
-- 拖拽时支持基准线/支持范围限制
-- v-resizable指令支持按比例缩放
